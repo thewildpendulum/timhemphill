@@ -1,0 +1,9 @@
+.post
+	h2= post.title
+	p= post.body
+	span= post.dateCreated
+	span.inline_tags= post.tags
+
+ul.list_tags
+each tag in tags
+	li= tag.name
