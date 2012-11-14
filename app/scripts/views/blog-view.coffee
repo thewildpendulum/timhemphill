@@ -53,7 +53,7 @@ App.Views.BlogView = Backbone.View.extend
 	render: ->
 		@$el.append 'blog view'
 		@$el.html @template
-						posts: @posts.filter @activeTags.pluck 'name'
+						posts: @posts.filterByTags @activeTags.pluck 'name'
 						tags: @tags.toJSON()
 		@
 
