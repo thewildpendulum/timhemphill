@@ -1,5 +1,7 @@
 App.Collections.Tags = Backbone.Collection.extend
-	model: App.Models.Post
+	model: App.Models.Tag
+
+	url: 'api/tags'
 
 	findOne: (query) ->
 		result = @.where(query)

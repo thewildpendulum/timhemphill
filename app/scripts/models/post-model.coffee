@@ -1,4 +1,8 @@
 App.Models.Post = Backbone.Model.extend
+	idAttribute: '_id'
+
+	urlRoot: 'api/posts'
+
 	defaults:
 		name: ''
 		title: ''
@@ -12,10 +16,10 @@ App.Models.Post = Backbone.Model.extend
 		text.replace /\s+/g, '-'
 
 	push: (attr, val) ->
-		arr = @.get attr
+		arr = @get attr
 		arr.push val
-		@.set attr, arr
+		@set attr, arr
 
 	remove: (attr, val) ->
-		arr = @.get attr
-		@.set attr, _.without arr, val
+		arr = @get attr
+		@set attr, _.without arr, val

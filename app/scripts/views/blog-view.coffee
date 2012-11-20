@@ -1,69 +1,40 @@
 App.Views.BlogView = Backbone.View.extend
-	el: $('#view')
+	el: $('#main')
 
 	template: _.template """
+		<h2> Blog </h2>
 		<% _.each(posts, function(post) { %>
 			<div class="post" id="<%= post.name %>">
-				<h2> <%= post.title %> </h2>
-				<p> <%= post.preview %> </p>
-				<p> <a href="/blog/<%= post.name %>"> Read more... </a> </p>
-				<span> <%= post.dateCreated %> </span>
-				<span> <%= post.tags %> </span>
+				<h3> <%= post.title %> </h3>
+				<p> <%= post.body %> </p>
+				<p> <a href="/<%= post.name %>"> Read more... </a> </p>
+				Posted: <span> <%= post.dateCreated %> </span>
+				Tags: <span> <%= post.tags.join(', ') %> </span>
+				<a href="admin/edit/<%= post.name %>"> Edit </a>
 			</div>
 		<% }); %>
-
-		<div class="sideView">
-			<ul>
-				<% _.each(tags, function(tag) { %>
-					<li class="tag" id="<%= tag.name %>"> <%= tag.name %> </li>
-				<% }); %>
-			</ul>
-		</div>
+		<a href="admin/new"> New </a>
 	"""
 
-	initialize: ->
+	initialize: (options) ->
 		_.bindAll @
-		# @posts = App.Collections.Posts.fetch()
-		@posts = new App.Collections.Posts [{ 
-						name: "post-1",
-						title: "post 1",
-						body: "this is my first blog post. woo!",
-						preview: "this is my first",
-						tags: ["eating", "fire"],
-						dateCreated: "11/3/2012 4:37PM"
-					}, {
-						name: "post-2",
-						title: "post 2",
-						body: "this is my second blog post. woo!",
-						preview: "this is my second",
-						tags: ["kittens", "eating"],
-						dateCreated: "11/3/2012 4:39PM"
-					}]
 
-		# @tags = App.Collections.Tags.fetch()
-		@tags = new App.Collections.Tags [{name: 'fire'}, {name: 'kittens'}, {name: 'eating'}]
+		@posts = options.posts
+		@filterTags = []
 
-		#Keep track of tags to filer on and render the view
-		#with filtered posts when activeTags changes
-		@activeTags = new App.Collections.Tags
-		@activeTags.bind 'add remove', @render
+		#Load pagination script
+		$('body').append '<script src="scripts/vendor/backbone.paginator.min.js"></script>'
+		
+		#Listen for tag click events in TagsView and filter posts
+		App.eventAggregator.on 'tagsUpdated', @filterPosts
 		
 		@render()
 
 	render: ->
-		@$el.append 'blog view'
-		@$el.html @template
-						posts: @posts.filterByTags @activeTags.pluck 'name'
-						tags: @tags.toJSON()
+		@$el.html @template posts: @posts.filterByTags @filterTags
+		
 		@
 
-	filterPosts: (e) ->
-		tag = @tags.findOne name: e.srcElement.id
-
-		if @activeTags.has tag
-			@activeTags.remove tag
-		else
-			@activeTags.add tag
-
-	events:
-		'click .tag': 'filterPosts'
+	filterPosts: (activeTags) ->
+		@filterTags = activeTags.pluck 'name'
+		@render()

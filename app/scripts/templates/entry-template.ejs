@@ -1,0 +1,11 @@
+<input id="title" placeholder="Title" />
+<div id="epiceditor"></div>
+<span id='save'>Save</span>
+<span id='select_preview'>Select Preview Text</span>
+<div id="entry_tags" class="entry_tags">
+	<ul>
+		<% _.each(tags, function(tag) { %>
+			<li class="tag" id="<%= tag.name %>"> <%= tag.name %> </li>
+		<% }); %>
+	</ul>
+</div>

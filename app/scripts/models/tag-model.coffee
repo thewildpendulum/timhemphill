@@ -1,2 +1,7 @@
 App.Models.Tag = Backbone.Model.extend
-	name: ''
+	idAttribute: '_id'
+
+	urlRoot: 'api/tags'
+
+	defaults:
+		name: ''

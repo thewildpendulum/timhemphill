@@ -1,0 +1,17 @@
+<% _.each(posts, function(post) { %>
+	<div class="post" id="<%= post.name %>">
+		<h2> <%= post.title %> </h2>
+		<p> <%= post.preview %> </p>
+		<p> <a href="/blog/<%= post.name %>"> Read more... </a> </p>
+		Posted: <span> <%= post.dateCreated %> </span>
+		Tags: <span> <%= post.tags.join(', ') %> </span>
+	</div>
+<% }); %>
+
+<div class="sideView">
+	<ul>
+		<% _.each(tags, function(tag) { %>
+			<li class="tag" id="<%= tag.name %>"> <%= tag.name %> </li>
+		<% }); %>
+	</ul>
+</div>
