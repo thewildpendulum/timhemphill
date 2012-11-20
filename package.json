@@ -1,7 +1,11 @@
 {
-  "author": "",
-  "name": "",
-  "version": "0.0.0",
-  "dependencies": {},
-  "devDependencies": {}
+  "author": "Tim Hemphill",
+  "name": "timhemphill.com",
+  "private": "true",
+  "version": "0.0.1",
+  "dependencies": {
+  	"ejs":			"*",
+  	"express": 		"3.0.x",
+  	"mongoskin":	"*"
+  }
 }
