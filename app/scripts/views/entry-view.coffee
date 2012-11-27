@@ -7,7 +7,7 @@ App.Views.EntryView = Backbone.View.extend
 		<div id="epiceditor"></div>
 		<span id='save'>Save</span>
 		<!-- <span id='select_preview'>Select Preview Text</span> -->
-		<a href="#blog"> Back to blog </a>
+		<a href="/blog"> Back to blog </a>
 	"""
 
 	events:
@@ -19,10 +19,7 @@ App.Views.EntryView = Backbone.View.extend
 
 		@entry = options.entry
 
-		#Load epiceditor script
-		$('body').append '<script src="scripts/vendor/epiceditor.min.js"></script>'
-
-		#Listen for tag click events in TagsView and add tags to entry
+		#Listen for tag click events in TagsView
 		App.eventAggregator.on 'tagsUpdated', @updateTags
 
 		@render()
@@ -31,7 +28,7 @@ App.Views.EntryView = Backbone.View.extend
 		@$el.html @template
 
 		#Load editor
-		@editor = new EpicEditor().load()
+		@editor = new EpicEditor({basePath: '/epiceditor'}).load()
 
 		#fill in fields if editing
 		if @entry.get 'body' then @editor.importFile '', @entry.get 'body'
@@ -45,11 +42,13 @@ App.Views.EntryView = Backbone.View.extend
 		@entry.set 'body', @editor.exportFile(null, 'html')
 		@entry.set 'title', $('#title').val()
 		@entry.set 'dateCreated', new Date()
-		@entry.set 'id', @entry.dashify @entry.get 'title'
+		@entry.set 'name', @entry.dashify @entry.get 'title'
 
 		console.log @entry.toJSON()
 
 		# @entry.save()
+		#add entry to posts collection
+		App.posts.create @entry unless App.posts.has @entry then @entry.save()
 		#clears editor buffer
 		# @editor.importFile ''
 		#reload posts in router

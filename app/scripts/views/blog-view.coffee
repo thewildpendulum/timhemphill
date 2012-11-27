@@ -7,13 +7,13 @@ App.Views.BlogView = Backbone.View.extend
 			<div class="post" id="<%= post.name %>">
 				<h3> <%= post.title %> </h3>
 				<p> <%= post.body %> </p>
-				<p> <a href="/<%= post.name %>"> Read more... </a> </p>
+				<p> <a href="/blog/<%= post.name %>"> Read more... </a> </p>
 				Posted: <span> <%= post.dateCreated %> </span>
 				Tags: <span> <%= post.tags.join(', ') %> </span>
-				<a href="admin/edit/<%= post.name %>"> Edit </a>
+				<a href="/admin/edit/<%= post.name %>"> Edit </a>
 			</div>
 		<% }); %>
-		<a href="admin/new"> New </a>
+		<a href="/admin/new"> New </a>
 	"""
 
 	initialize: (options) ->

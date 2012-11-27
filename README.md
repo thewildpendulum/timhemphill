@@ -22,14 +22,14 @@ I have a separate directory where I put together the node app. It looks like thi
     index.ejs
 ```
 
-I scaffolded the frontend with the Yeoman Backbone generator. Running `yeoman server` in this repo will create a `temp` directory with all the scripts compiled from CoffeeScript to JavaScript. Right now, I'm just pulling things from the repo and dropping them into the node app directory.
+I scaffolded the frontend with the Yeoman Backbone generator. Running `yeoman server` in this repo will compile the scripts from CoffeeScript to JavaScript and output them in `/public/scripts`. Right now, I'm just pulling the rest from the repo and dropping them into the node app directory.
 
-* `temp/scripts` and '/app/scripts/vendor` get moved to `/plublic/scripts'
-* `app/styles` gets moved to `/public/styles`
-* same with epiceditor
-* same with the favicon
-* `app/index.html` -> `/views/index.ejs`
+* `/app/scripts/vendor` gets moved to `/public/scripts/vendor'
+* `/app/styles` gets moved to `/public/styles`
+* same with `epiceditor`
+* same with `favicon.ico`
+* `/app/index.html` -> `/views/index.ejs`
 
-Then you can run `node app.js` and open up your browswer at localhost:3501. But Yeoman and express can't be running the app at the same time, since they're set to use the same port and the app can't hit the db without express.
+Then you can kill Yeaoman and run `node app.js` and open up your browswer at localhost:3501.
 
-Yeah, it's a huge PITA. I've got a lot of notes on smoothing out the build process, including deploying to express instead of phantom.js with `yeoman server`, CoffeeScript sourcemaps for Chrome, etc. Check back in a while to see how it turns out!
+Yeah, it's a huge PITA. If I were more enterprising, I would have mocks for the db and api so I could do frontend and backend dev separately and there would be tests and things. But again, I'm just trying to get to 'done' before I get to 'good'. I've got a lot of notes on smoothing out the dev process, including getting yeoman and express to play nice together, CoffeeScript sourcemaps for debugging, etc. Check back in a while to see how it turns out!

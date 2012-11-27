@@ -4,7 +4,7 @@
 var express = require('express'),
     mongo = require('mongoskin'),
     app = module.exports = express(),
-    db = mongo.db('localhost:27017/thsite');
+    db = mongo.db('localhost:27017/thsite', {safe: true});
 
 // Configuration
 
@@ -36,8 +36,9 @@ app.get('/blog', function (req, res) {
 });
 
 app.get('/blog/:name', function (req, res) {
-  db.collection('blog').findOne(params.name, function (err, post) {
-    res.render('post', {post: post});
+  db.collection('blog').findOne(req.params.name, function (err, post) {
+    console.log(err);
+    // res.render('post', {post: post});
   });
 });
 
