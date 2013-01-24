@@ -1,42 +1,42 @@
 App.Views.TagsView = Backbone.View.extend
-	el: $('#sidebar')
+    el: $('#sidebar')
 
-	template: _.template """
-		<h2> Tags </h2>
-		<ul>
-			<% _.each(tags, function(tag) { %>
-				<li class="tag" id="<%= tag.name %>"> <%= tag.name %> </li>
-			<% }); %>
-		</ul>
-	"""
+    template: _.template """
+        <h2> Tags </h2>
+        <ul>
+            <% _.each(tags, function(tag) { %>
+                <li class="tag" id="<%= tag.name %>"> <%= tag.name %> </li>
+            <% }); %>
+        </ul>
+    """
 
-	events:
-		'click .tag': 'updateTags'
+    events:
+        'click .tag': 'updateTags'
 
-	initialize: (options) ->
-		_.bindAll @
-		
-		@tags = options.tags
+    initialize: (options) ->
+        _.bindAll @
 
-		#Keep track of tag clicks
-		@activeTags = new App.Collections.Tags
-		@activeTags.bind 'add remove', @notify
+        @tags = options.tags
 
-		@render()
+        #Keep track of tag clicks
+        @activeTags = new App.Collections.Tags
+        @activeTags.bind 'add remove', @notify
 
-	render: ->
-		@$el.html @template tags: @tags.toJSON()
+        @render()
 
-		@
+    render: ->
+        @$el.html @template tags: @tags.toJSON()
 
-	updateTags: (e) ->
-		tag = @tags.findOne name: e.srcElement.id
+        @
 
-		if @activeTags.has tag
-			@activeTags.remove tag
-		else
-			@activeTags.add tag
+    updateTags: (e) ->
+        tag = @tags.findOne name: e.srcElement.id
 
-	notify: ->
-		console.log @activeTags
-		App.eventAggregator.trigger 'tagsUpdated', @activeTags
+        if @activeTags.has tag
+            @activeTags.remove tag
+        else
+            @activeTags.add tag
+
+    notify: ->
+        console.log @activeTags
+        App.eventAggregator.trigger 'tagsUpdated', @activeTags

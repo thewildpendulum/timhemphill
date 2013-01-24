@@ -4,8 +4,16 @@
   "private": "true",
   "version": "0.0.1",
   "dependencies": {
-  	"ejs":			"*",
-  	"express": 		"3.0.x",
-  	"mongoskin":	"*"
+    "coffee-script": "1.4.x",
+    "ejs": "*",
+    "express": "3.0.x",
+    "mongoskin": "*"
+  },
+  "devDependencies": {
+    "mocha": "1.8.x",
+    "grunt": "0.3.x",
+    "grunt-mocha": "0.2.x",
+    "grunt-coffeelint": "0.0.3",
+    "grunt-coffee": "0.0.6"
   }
 }
