@@ -1,7 +1,7 @@
 # Dependencies
 
 express = require 'express'
-mongo = require 'mongo'
+mongo = require 'mongoskin'
 app = module.exports = express()
 db = mongo.db 'localhost:27017/thsite', safe: true
 

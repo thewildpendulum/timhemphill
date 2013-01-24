@@ -1,35 +1,27 @@
 # timhemphill.com
 
 ## About
-This is the repo for my professional website and blog. It runs on node.js and Backbone. Making it gave me the excuse to also try out CoffeeScript and Yeoman. I use EpicEditor and marked to write and publish new posts straight from the site and I store everything in a mongo database with mongoskin.
+This is the repo for my professional website and blog. It runs on node.js and Backbone. Making it gave me the excuse to also try out CoffeeScript and Yeoman. I use EpicEditor and marked to write and publish new posts in Markdown straight from the site and I store everything in a Mongo database with mongoskin.
 
 Feel free to poke around. Once the site is up, there will be blog posts about how I put everything together.
 
 ## Dev
-I decided to cram everything into this repo, so it'll take just a bit of work to get everything running. My main priority is getting this thing done, so I haven't taken the time to properly configure the build process for my workflow, but the general setup is as follows:
+I'm currently reworking the build process. Yeoman is a great tool, but seems to be getting in the way when trying to build out the front and back end at the same time (and I couldn't get the Yeoman/Express stack to work properly). While starting off with proper tests might have made this easier, I've already got the API and DB working, so writing mocks/stubs at this point feels superfluous. Instead, I've switched to just using grunt by itself, which I've been enjoying immensely. In stark contrast to earlier commits, building this project is now dead simple (assuming you've got node, mongo, and grunt all ready to go).
 
-I have a separate directory where I put together the node app. It looks like this:
+Install the dependencies:
 
-```
-/root
-  app.js
-  /public
-    favicon.ico
-    /epiceditor
-    /scripts
-    /styles
-  /views
-    index.ejs
-```
+`npm i`
 
-I scaffolded the frontend with the Yeoman Backbone generator. Running `yeoman server` in this repo will compile the scripts from CoffeeScript to JavaScript and output them in `/public/scripts`. Right now, I'm just pulling the rest from the repo and dropping them into the node app directory.
+...build the project using grunt:
 
-* `/app/scripts/vendor` gets moved to `/public/scripts/vendor'
-* `/app/styles` gets moved to `/public/styles`
-* same with `epiceditor`
-* same with `favicon.ico`
-* `/app/index.html` -> `/views/index.ejs`
+`grunt`
 
-Then you can kill Yeaoman and run `node app.js` and open up your browswer at localhost:3501.
+...and that's it. Just run `node server.js`, navigate to localhost:3501 in your broswer, and bask in the glory.
 
-Yeah, it's a huge PITA. If I were more enterprising, I would have mocks for the db and api so I could do frontend and backend dev separately and there would be tests and things. But again, I'm just trying to get to 'done' before I get to 'good'. I've got a lot of notes on smoothing out the dev process, including getting yeoman and express to play nice together, CoffeeScript sourcemaps for debugging, etc. Check back in a while to see how it turns out!
+If there were tests, they wouldn't be passing with this commit, but that'll change soon. I just wanted to get things organized before moving any further. The next couple rounds of commits will bring:
+
+* Mocha tests for both the Express server and Backbone app
+* full pushState support with client and server side templating
+* source mapping for debugging straight from CoffeeScript
+
+And don't hesistate to pillage my code is you see anything useful.

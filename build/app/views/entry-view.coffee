@@ -28,7 +28,7 @@
         @$el.html @template
 
         #Load editor
-        @editor = new EpicEditor({basePath: '/epiceditor'}).load()
+        @editor = new EpicEditor({basePath: '/vendor/epiceditor'}).load()
 
         #fill in fields if editing
         if @entry.get 'body' then @editor.importFile '', @entry.get 'body'

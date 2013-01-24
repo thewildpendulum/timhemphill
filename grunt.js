@@ -3,7 +3,7 @@ module.exports = function(grunt) {
 
         // Lint CoffeeScript files
         coffeelint: {
-            app: ['app/scripts/**/*.coffee', 'server/**/*.coffee'] //add tests
+            app: ['build/**/*.coffee'] //add tests
         },
         coffeelintOptions: {
             'indentation': {
@@ -25,14 +25,15 @@ module.exports = function(grunt) {
         // Compile CoffeeScript files
         coffee: {
             app: {
-                src: ['app/scripts/**/*.coffee'],
-                dest: 'public/scripts/',
+                src: ['build/app/**/*.coffee'],
+                dest: 'public/scripts',
                 options: {
-                    preserve_dirs: true
+                    preserve_dirs: true,
+                    base_path: 'build/app'
                 }
             },
             server: {
-                src: ['server/**/*.coffee'],
+                src: ['build/server/**/*.coffee'],
                 dest: './'
             },
         },
@@ -53,7 +54,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-coffee');
     grunt.loadNpmTasks('grunt-mocha');
 
-    grunt.registerTask('default', 'coffeelint coffee watch');
+    grunt.registerTask('default', 'coffeelint coffee');
 };
 
 // need to figure out what to do with app/ and public/. do i really need two?
