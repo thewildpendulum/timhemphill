@@ -22,6 +22,6 @@ If there were tests, they wouldn't be passing with this commit, but that'll chan
 
 * Mocha tests for both the Express server and Backbone app
 * full pushState support with client and server side templating
-* source mapping for debugging straight from CoffeeScript
+* ~~source mapping for debugging straight from CoffeeScript~~
 
 And don't hesistate to pillage my code is you see anything useful.
