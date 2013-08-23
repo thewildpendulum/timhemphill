@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 
         // Compile Handlebars templates
         handlebars: {
-            carbon: {
+            dev: {
                 options: {
                     namespace: "App.Templates",
                     processName: function(filename) {
@@ -48,12 +48,14 @@ module.exports = function(grunt) {
 
         // Watch for updates
         watch: {
-            files: ['<%= app.coffee %>', '<%= server.coffee %>'],
+            files: ['<%= client.coffee %>', '<%= server.coffee %>'],
             tasks: ['coffee', 'handlebars']
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-coffee');
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-mocha');
 
     grunt.registerTask('default', ['coffee', 'handlebars']);
