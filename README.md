@@ -1,7 +1,7 @@
 # timhemphill.com
 
 ## About
-This is the repo for my professional website and blog. It runs on node.js and Backbone. Making it gave me the excuse to also try out CoffeeScript and Yeoman. I use EpicEditor and marked to write and publish new posts in Markdown straight from the site and I store everything in a Mongo database with mongoskin.
+This is the repo for my professional website and blog. It runs on node.js and Backbone. Making it gave me the excuse to also try out CoffeeScript and Yeoman.
 
 Feel free to poke around. Once the site is up, there will be blog posts about how I put everything together.
 
@@ -21,7 +21,8 @@ Install the dependencies:
 If there were tests, they wouldn't be passing with this commit, but that'll change soon. I just wanted to get things organized before moving any further. The next couple rounds of commits will bring:
 
 * Mocha tests for both the Express server and Backbone app
-* full pushState support with client and server side templating
 * ~~source mapping for debugging straight from CoffeeScript~~
 
-And don't hesistate to pillage my code is you see anything useful.
+I had grandiose dreams for this project, but after 7 months not making this blog and being very busy doing this same thing, but for money, I realized that something is better than nothing. The end result will be minimal, but functional, and we can iterate on the rest, right?
+
+If it strikes you, don't hesistate to pillage my code is you see anything useful.
