@@ -1,4 +1,5 @@
 window.App =
+    Templates: {}
     Models: {}
     Collections: {}
     Views: {}

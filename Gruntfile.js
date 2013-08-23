@@ -2,9 +2,9 @@ module.exports = function(grunt) {
     grunt.initConfig({
         // Paths
         client: {
-            coffee: ['build/app/**/*.coffee']
+            coffee: ['build/app/**/*.coffee'],
+            hbs: ['build/app/templates/*.hbs']
         },
-
         server: {
             coffee: ['build/server/*.coffee']
         },
@@ -24,6 +24,23 @@ module.exports = function(grunt) {
             }
         },
 
+        // Compile Handlebars templates
+        handlebars: {
+            carbon: {
+                options: {
+                    namespace: "App.Templates",
+                    processName: function(filename) {
+                        var path = filename.split("/");
+                        var file = path[path.length-1];
+                        return file.split(".")[0];
+                    }
+                },
+                files: {
+                    'public/scripts/templates.js': '<%= client.hbs %>'
+                }
+            }
+        },
+
         // Run tests
         mocha: {
             all: ['test/*.html']
@@ -32,16 +49,13 @@ module.exports = function(grunt) {
         // Watch for updates
         watch: {
             files: ['<%= app.coffee %>', '<%= server.coffee %>'],
-            tasks: 'coffee'
+            tasks: ['coffee', 'handlebars']
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-mocha');
 
-    grunt.registerTask('default', ['coffee']);
-    grunt.registerTask('dev', ['coffee', 'watch']);
+    grunt.registerTask('default', ['coffee', 'handlebars']);
+    grunt.registerTask('dev', ['coffee', 'handlebars','watch']);
 };
-
-// need to figure out what to do with app/ and public/. do i really need two?
-// at least put coffee files somewhere to compile to somewhere else, right?

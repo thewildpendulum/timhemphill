@@ -8,8 +8,8 @@ db = mongo.db 'localhost:27017/thsite', safe: true
 # Configuration
 
 app.configure ->
-    app.set 'views', __dirname + '/views'
-    app.set 'view engine', 'ejs'
+    # app.set 'views', __dirname + '/views'
+    # app.set 'view engine', 'handlebars'
     app.use express.bodyParser()
     app.use express.methodOverride()
     app.use express.static __dirname + '/public'
